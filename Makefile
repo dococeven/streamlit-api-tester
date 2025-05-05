@@ -8,6 +8,10 @@ STREAMLIT = $(VENV_NAME)/bin/streamlit
 run: venv
 	$(STREAMLIT) run app.py
 
+# Default target (run the app)
+run2: venv
+	$(STREAMLIT) run app2.py
+
 # Set up a virtual environment
 venv:
 	python -m venv $(VENV_NAME)
