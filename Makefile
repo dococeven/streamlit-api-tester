@@ -12,6 +12,9 @@ run: venv
 run2: venv
 	$(STREAMLIT) run app2.py
 
+run3: venv
+	$(STREAMLIT) run app3.py
+
 # Set up a virtual environment
 venv:
 	python -m venv $(VENV_NAME)
