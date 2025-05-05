@@ -5,7 +5,8 @@ import requests
 st.title("API Tester")
 
 # Input for API endpoint
-url = st.text_input("Enter API URL", "https://jsonplaceholder.typicode.com/posts/1")
+#url = st.text_input("Enter API URL", "https://jsonplaceholder.typicode.com/posts/1")
+url = st.text_input("Enter API URL", "https://dss-api-p0-shared.prod.macif.fr/public/api/v1/Fraud_Prediction_Service-2/Fraud_Prediction_EP/predict")
 
 # Select HTTP method
 method = st.selectbox("Select HTTP Method", ["GET", "POST"])
