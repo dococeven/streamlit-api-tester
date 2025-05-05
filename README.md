@@ -27,8 +27,8 @@
 ## **Installation** <!-- Steps to set up the project -->
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/your-repo.git
-cd your-repo
+git clone https://github.com/dococeven/streamlit-api-tester.git
+cd streamlit-api-tester
 
 # Install dependencies (Makefile automates this)
 make install
