@@ -3,49 +3,63 @@ VENV_NAME ?= venv
 PYTHON = $(VENV_NAME)/bin/python
 PIP = $(VENV_NAME)/bin/pip
 STREAMLIT = $(VENV_NAME)/bin/streamlit
+GIT_BRANCH ?= main
 
-# Default target (run the app)
+
+
+# Targets
 run: venv
 	$(STREAMLIT) run app.py
 
-# Default target (run the app)
 run2: venv
 	$(STREAMLIT) run app2.py
 
 run3: venv
 	$(STREAMLIT) run app3.py
 
-# Set up a virtual environment
+# Create virtual environment (if missing)
 venv:
-	python -m venv $(VENV_NAME)
-	$(PIP) install --upgrade pip
-	$(PIP) install -r requirements.txt
+	test -d $(VENV_NAME) || python3 -m venv $(VENV_NAME)
+	$(VENV_NAME)/bin/python -m pip install --upgrade pip
+	$(VENV_NAME)/bin/python -m pip install -r requirements.txt
 
-# Install dependencies
 install: venv
 	$(PIP) install -r requirements.txt
 
-# Git: Pull latest changes
 sync-pull:
 	git pull origin $(GIT_BRANCH)
 
-# Git: Commit and push (usage: `make sync-push M="Your commit message"`)
 sync-push:
 	git add .
 	git commit -m "$(M)"
 	git push origin $(GIT_BRANCH)
 
-# Clean up virtual environment
 clean:
 	rm -rf $(VENV_NAME)
 	rm -rf __pycache__
 
-# Run tests (example: add pytest later)
 test: venv
 	$(PYTHON) -m pytest tests/
 
-# Lint code (example: flake8)
 lint: venv
 	$(PYTHON) -m flake8 app.py
 
-.PHONY: run install clean test lint
+activate:
+	@echo "Run this command manually:"
+	@echo "source $(VENV_NAME)/bin/activate  # Linux/macOS"
+	@echo ".\$(VENV_NAME)\Scripts\activate   # Windows"
+
+help:
+	@echo "Available targets:"
+	@echo "  run       - Launch Streamlit app (app.py)"
+	@echo "  run2      - Launch Streamlit app (app2.py)"
+	@echo "  run3      - Launch Streamlit app (app3.py)"
+	@echo "  venv      - Create virtual environment and install dependencies"
+	@echo "  install   - Install dependencies"
+	@echo "  sync-pull - Pull latest Git changes"
+	@echo "  sync-push - Commit and push changes (use M='message')"
+	@echo "  clean     - Remove virtual environment and cache"
+	@echo "  test      - Run pytest"
+	@echo "  lint      - Run flake8 linting"
+
+.PHONY: run run2 run3 venv install sync-pull sync-push clean test lint activate help

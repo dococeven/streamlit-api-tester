@@ -1,4 +1,4 @@
-#!/workspaces/streamlit-api-tester/venv/bin/python
+#!/Users/ceven/Streamlit-local/streamlit-api-tester/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
